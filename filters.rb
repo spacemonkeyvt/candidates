@@ -7,22 +7,18 @@ def experienced?(candidate)
   return "Candidate has the requested years of experience: #{yes_to_exp}"
 end
 
-def qualified_candidates
-    @candidates.each do |person|
-      return "#{person} is qualified!\n\n" if (person[:years_of_experience] >= 2) && (person[:github_points] >= 100) && (person[:languages] == ("Ruby" || "Python")) && ([:date_applied] >= 15.days.ago.to_date)) && ([:age] >= 18)
-    end
+def has_enough_github_pts?(candidate)
+  candidate[:github_points] >= 100
 end
 
-# def qualified_candidates
-#   #takes in all candidates
-#   #returns candidates who
-#     ## experienced? == true
-#     ## [:github_points] >= 100
-#     ## [:languages] == ("Ruby" || "Python")
-#     ## [:date_applied] >= 15.days.ago.to_date)
-#     ## [:age] >= 18
+def has_right_languages?(candidate)
+  candidate[:languages].include?('Ruby' || 'Python')
+end
 
-#     @candidates.each do |person|
-#       return "#{person} is qualified!\n\n" if person[:years_of_experience] >= 2 && person[:github_points] >= 100 && person[:languages] == ("Ruby" || "Python") && [:date_applied] >= 15.days.ago.to_date) && [:age] >= 18
-#     end
-# end
+def applied_within_15_days?(candidate)
+  candidate[:date_applied] > 15.days.ago.to_date
+end
+
+def is_of_age?(candidate)
+  candidate[:age] >= 18
+end
