@@ -8,6 +8,16 @@ require './filters'
 
 ## Your test code can go here
 
-# binding.pry
+def qualified_candidates(candidates)
+  puts "Candidates that meet your specs:"
 
-pp qualified_candidates
+  qualified = candidates.select do |c|
+    experienced?(c)
+    has_enough_github_pts?(c) &&
+    has_right_languages?(c) &&
+    applied_within_15_days?(c) &&
+    is_of_age?(c)
+  end
+end
+
+pp qualified_candidates(@candidates)
